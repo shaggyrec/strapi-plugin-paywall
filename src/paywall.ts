@@ -76,7 +76,7 @@ function track(rule, path, visitor) {
   }
 }
 
-function isScrolledDown(el): boolean {
+function isScrolledDown(el) {
   const rect = el.getBoundingClientRect();
   return rect.bottom < rect.height * 0.25
 }
