@@ -29,7 +29,7 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
     type: contentTypes[0],
     path: '/' + collectionTypesNames[0],
     field: Object.keys(collectionTypes[collectionTypesNames[0]])
-      .filter(f => ['string', 'text'].indexOf(collectionTypes[collectionTypesNames[0]][f].type) !== -1)[0],
+      .filter(f => ['string', 'text', 'richtext'].indexOf(collectionTypes[collectionTypesNames[0]][f].type) !== -1)[0],
     ...defaultOptions[contentTypes[0]],
     ...(rule || {})
   });
@@ -87,7 +87,7 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
               <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'field')}>
                 {
                   Object.keys(collectionTypes[state.model])
-                    .filter(f => ['string', 'text'].indexOf(collectionTypes[state.model][f].type) !== -1)
+                    .filter(f => ['string', 'text', 'richtext'].indexOf(collectionTypes[state.model][f].type) !== -1)
                     .map(t => (<option key={`${state.model}-rule-contentTypes-field-${t}`}>{t}</option>))
                 }
               </select>
