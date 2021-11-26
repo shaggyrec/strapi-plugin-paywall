@@ -9,7 +9,6 @@
 const { exec } = require('child_process');
 const fs = require('fs');
 const { extractMeta } = require('./utils/functions');
-const {visit} = require("../controllers/paywall");
 
 module.exports = {
   async getSettings() {
@@ -54,7 +53,7 @@ module.exports = {
   async compileFrontend(host) {
     const settings = await this.getSettings();
     exec(
-      'cd ' + __dirname + '/.. && ./node_modules/.bin/webpack --mode=production --output-path=' + process.cwd() + '/public',
+      'cd ' + __dirname + '/.. && ' +  process.cwd() + '/node_modules/.bin/webpack --mode=production --output-path=' + process.cwd() + '/public',
         e => {
         console.log(e ? e.message : 'paywall.js has been compiled')
         if (e) {
