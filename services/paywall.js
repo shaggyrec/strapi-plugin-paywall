@@ -53,7 +53,7 @@ module.exports = {
   async compileFrontend(host) {
     const settings = await this.getSettings();
     exec(
-      'cd ' + __dirname + '/.. && ' +  process.cwd() + '/node_modules/.bin/webpack --mode=production --output-path=' + process.cwd() + '/public',
+      'cd ' + __dirname + '/.. && ' +  process.cwd() + '/node_modules/.bin/webpack --mode=production --config=' + __dirname + '/../webpack.config.js --output-path=' + process.cwd() + '/public',
         e => {
         console.log(e ? e.message : 'paywall.js has been compiled')
         if (e) {
