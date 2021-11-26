@@ -15,7 +15,7 @@ import pluginId from "../../pluginId";
 function requestHeaders() {
   return {
     headers: {
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwtToken'))}`,
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwtToken') || sessionStorage.getItem('jwtToken'))}`,
     }
   };
 }
