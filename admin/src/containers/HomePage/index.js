@@ -26,14 +26,19 @@ function HomePage () {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
   const [listCap, setListCap] = useState(0);
-  const [listOffset, setListOffset] = useState(0)
+  const [listOffset, setListOffset] = useState(0);
+  const [filterByVisitor, setFilterByVisitor] = useState('');
 
   async function fetchData() {
     setLoading(true);
-    let r = await axios.get(strapi.backendURL + '/paywall/list?_limit=' + PER_PAGE + '&_start=' + listOffset, requestHeaders());
+    const filters = filterByVisitor ? ('visitor_eq=' + filterByVisitor) : '';
+    let r = await axios.get(
+      strapi.backendURL + '/paywall/list?_limit=' + PER_PAGE + '&_start=' + listOffset + '&' + filters,
+      requestHeaders()
+    );
     setList(r.data);
     setLoading(false);
-    r = await axios.get(strapi.backendURL + '/paywall/list/count', requestHeaders());
+    r = await axios.get(strapi.backendURL + '/paywall/list/count?' + filters, requestHeaders());
     setListCap(r.data);
   }
 
@@ -43,10 +48,10 @@ function HomePage () {
 
   useEffect(() => {
     fetchData();
-  }, [listOffset]);
+  }, [listOffset, filterByVisitor]);
 
   function handleChangeOffset(o) {
-      setListOffset(o);
+    setListOffset(o);
   }
 
   async function handleClickReset() {
@@ -65,7 +70,11 @@ function HomePage () {
       <div className="py-5">
         <Link to="/plugins/paywall/settings" className="btn btn-primary px-4 py-2"><h4>Settings</h4></Link>
       </div>
-      <TrackingList list={list} />
+      <TrackingList
+        list={list}
+        visitorId={filterByVisitor}
+        onChangeVisitorId={setFilterByVisitor}
+      />
       <TrackingListPaginator
         cap={listCap}
         perPage={PER_PAGE}
