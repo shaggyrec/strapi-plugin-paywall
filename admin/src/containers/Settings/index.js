@@ -89,7 +89,7 @@ function SettingsPage () {
         <Rules
           contentTypes={contentTypes}
           onChange={rules => handleChangeSettings({ rules })}
-          rules={settings.rules}
+          rules={settings.rules || []}
         />
       </div>
     </div>
