@@ -2,6 +2,8 @@
 
 ## Install the plugin
 
+    npm i git@bitbucket.org:x2-investa-nl/strapi-plugin-paywall.git 
+
 ### Go to the admin panel.
 
 Open plugins's settings and add rules for content types.
