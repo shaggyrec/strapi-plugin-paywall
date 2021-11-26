@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "PATCH",
+      "path": "/reset",
+      "handler": "paywall.reset",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/list",
+      "handler": "paywall.list",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/list/count",
+      "handler": "paywall.listAmount",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method":"GET",
+      "path": "/content/:model/:id/:visitor",
+      "handler": "paywall.getContent",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/visit",
+      "handler": "paywall.setVisitorId",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/visit/path",
+      "handler": "paywall.visit",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/settings",
+      "handler": "paywall.getSettings",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/settings",
+      "handler": "paywall.setSettings",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/content-types",
+      "handler": "paywall.contentTypes",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

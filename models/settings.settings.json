@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "settings",
+  "info": {
+    "name": "settings",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": "",
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "token": {
+      "type": "string",
+      "required": true
+    },
+    "rules": {
+      "type": "text"
+    },
+    "hardCapLimitation": {
+      "type": "integer"
+    }
+  }
+}

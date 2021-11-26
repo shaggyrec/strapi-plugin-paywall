@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "paywall",
+  "info": {
+    "name": "paywall",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": "",
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "visitor": {
+      "type": "string",
+      "required": true
+    },
+    "visits": {
+      "type": "text"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "reset_at": {
+      "type": "timestamp"
+    }
+  }
+}
