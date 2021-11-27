@@ -7,7 +7,7 @@ function trimContent (content, wordsToShow) {
 function replacePaywall(dataObject, modelSettingsMap, isUserAuthorized) {
   if (dataObject && dataObject.paywall) {
     const ruleSettings = modelSettingsMap[dataObject.paywall];
-    if (!isUserAuthorized) {
+    if (!isUserAuthorized && ruleSettings) {
       if (Array.isArray(dataObject[ruleSettings.field])) {
         if (dataObject[ruleSettings.field][0].richText) {
           dataObject[ruleSettings.field][0].richText = trimContent(dataObject[ruleSettings.field][0].richText, ruleSettings.wordsToShow)
