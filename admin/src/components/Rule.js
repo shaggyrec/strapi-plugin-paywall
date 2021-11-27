@@ -64,7 +64,7 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
                 Field for paywall
               </div>
               <div className="w-75">
-                <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'videoField')}>
+                <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'field')}>
                   {
                     Object.keys(collectionTypes[state.model])
                       .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[state.model][f].type) !== -1)
@@ -80,7 +80,7 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
                 Field with video for paywall
               </div>
               <div className="w-75">
-                <select className="border px-2 py-1 w-100" value={state.videoField} onChange={(e) => handleChange(e, 'field')}>
+                <select className="border px-2 py-1 w-100" value={state.videoField} onChange={(e) => handleChange(e, 'videoField')}>
                   {
                     Object.keys(collectionTypes[state.model])
                       .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[state.model][f].type) !== -1)
