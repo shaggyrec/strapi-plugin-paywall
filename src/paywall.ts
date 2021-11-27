@@ -56,24 +56,20 @@ function observeLocations(location, visitor) {
 
 function track(rule, path, visitor) {
   axios.post(apiPath + '/visit/path', { path, visitor });
-  if (rule.type === 'article') {
-    const thresholdCb = () => axios.post(apiPath + '/visit/path', { path, visitor, threshold: true });
-    trackScroll('[data-paywall]', thresholdCb);
-    trackTimeOut = setTimeout(thresholdCb, rule.timeThreshold * 1000 * 60);
-  }
-  if (rule.type === 'wistia') {
-    // @ts-ignore
-    window._wq = window._wq || [];
-    // @ts-ignore
-    _wq.push({ id: "_all", onReady: function(video) {
-      console.log("This will run for every video on the page. Right now I'm on this one:", video);
-        video.bind("secondchange", function(s) {
-          if (s === rule.timeThreshold * 60) {
-            axios.post(apiPath + '/visit/path', { path, visitor, threshold: true });
-          }
-        });
-    }});
-  }
+  const thresholdCb = () => axios.post(apiPath + '/visit/path', { path, visitor, threshold: true });
+  trackScroll('[data-paywall]', thresholdCb);
+  trackTimeOut = setTimeout(thresholdCb, rule.timeThreshold * 1000 * 60);
+  // @ts-ignore
+  window._wq = window._wq || [];
+  // @ts-ignore
+  _wq.push({ id: "_all", onReady: function(video) {
+    clearTimeout(trackTimeOut);
+    video.bind('secondchange', function(s) {
+      if (s === rule.videoTimeThreshold * 60) {
+        thresholdCb();
+      }
+    });
+  }});
 }
 
 function isScrolledDown(el) {
