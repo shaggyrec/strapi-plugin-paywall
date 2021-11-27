@@ -15,7 +15,7 @@ function replacePaywall(dataObject, modelSettingsMap, isUserAuthorized) {
         if (dataObject[ruleSettings.field][0].text) {
           dataObject[ruleSettings.field][0].text = trimContent(dataObject[ruleSettings.field][0].text, ruleSettings.wordsToShow)
         }
-        dataObject[ruleSettings.field] = dataObject[ruleSettings.field][0];
+        dataObject[ruleSettings.field] = [dataObject[ruleSettings.field][0]];
       } else {
         dataObject[ruleSettings.field] = trimContent(dataObject[ruleSettings.field], ruleSettings.wordsToShow)
       }
