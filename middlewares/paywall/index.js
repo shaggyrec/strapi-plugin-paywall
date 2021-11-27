@@ -8,7 +8,9 @@ function replacePaywall(dataObject, modelSettingsMap, isUserAuthorized) {
   if (dataObject && dataObject.paywall) {
     const ruleSettings = modelSettingsMap[dataObject.paywall];
     if (!isUserAuthorized && ruleSettings) {
-      if (Array.isArray(dataObject[ruleSettings.field])) {
+      if (dataObject[ruleSettings.videoField]) {
+        dataObject[ruleSettings.videoField] = trimContent(dataObject[ruleSettings.videoField], 0)
+      } else if (Array.isArray(dataObject[ruleSettings.field])) {
         if (dataObject[ruleSettings.field][0].richText) {
           dataObject[ruleSettings.field][0].richText = trimContent(dataObject[ruleSettings.field][0].richText, ruleSettings.wordsToShow)
         }

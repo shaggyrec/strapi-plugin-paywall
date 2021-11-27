@@ -91,8 +91,8 @@ module.exports = {
     const visitorInfo = this.getInfoByVisitorId(visitor);
     const settings = await this.getSettings();
     const o = await strapi.query(strapi.models[model].modelName).findOne({ id });
-
-    return visitorInfo.enabled ? '...' : o[(settings.rules || []).find(r => r.model === model).field];
+    const rule = (settings.rules || []).find(r => r.model === model);
+    return visitorInfo.enabled ? '' : (o[rule.videoField] || o[rule.field]);
   },
 
   async storeVisit(visitor, path, threshold) {
