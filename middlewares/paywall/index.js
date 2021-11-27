@@ -8,7 +8,17 @@ function replacePaywall(dataObject, modelSettingsMap, isUserAuthorized) {
   if (dataObject && dataObject.paywall) {
     const ruleSettings = modelSettingsMap[dataObject.paywall];
     if (!isUserAuthorized) {
-      dataObject[ruleSettings.field] = trimContent(dataObject[ruleSettings.field], ruleSettings.wordsToShow)
+      if (Array.isArray(dataObject[ruleSettings.field])) {
+        if (dataObject[ruleSettings.field][0].richText) {
+          dataObject[ruleSettings.field][0].richText = trimContent(dataObject[ruleSettings.field][0].richText, ruleSettings.wordsToShow)
+        }
+        if (dataObject[ruleSettings.field][0].text) {
+          dataObject[ruleSettings.field][0].text = trimContent(dataObject[ruleSettings.field][0].text, ruleSettings.wordsToShow)
+        }
+        dataObject[ruleSettings.field] = dataObject[ruleSettings.field][0];
+      } else {
+        dataObject[ruleSettings.field] = trimContent(dataObject[ruleSettings.field], ruleSettings.wordsToShow)
+      }
     }
     delete dataObject.paywall;
   }
