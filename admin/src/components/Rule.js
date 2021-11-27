@@ -3,18 +3,15 @@ import React, {useState} from 'react';
 const contentTypes = ['article', 'wistia']
 
 const defaultOptions = {
-  [contentTypes[0]]: {
     timeThreshold: 3,
     fullReading: 1,
-    wordsToShow: 20
-  },
-  [contentTypes[1]]: {
-    timeThreshold: 5
-  }
+    wordsToShow: 20,
+    videoTimeThreshold: 5
 };
 
 const labelText = {
   timeThreshold: 'Time threshold',
+  videoTimeThreshold: 'Video time threshold (For articles with Wistia videos)',
   fullReading: 'Full reading to threshold',
   wordsToShow: 'World to show'
 };
@@ -32,20 +29,12 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
     path: '/' + collectionTypesNames[0],
     field: Object.keys(collectionTypes[collectionTypesNames[0]])
       .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[collectionTypesNames[0]][f].type) !== -1)[0],
-    ...defaultOptions[contentTypes[0]],
+    ...defaultOptions,
     ...(rule || {})
   });
 
   function handleChange ({ target: { value } }, fieldName) {
-    if (fieldName === 'type') {
-      setState({
-        model: state.model,
-        type: value,
-        ...defaultOptions[value]
-      })
-    } else {
-      setState({ ...state, [fieldName]: value });
-    }
+    setState({ ...state, [fieldName]: value });
   }
 
   function handleSubmit(e) {
@@ -63,18 +52,6 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
           <div className="w-75">
             <select className="border px-2 py-1 w-100" value={state.model} onChange={(e) => handleChange(e, 'model')}>
               {collectionTypesNames.map(t => (<option key={`${state.model}-rule-content-option-${t}`}>{t}</option>))}
-            </select>
-          </div>
-        </label>
-      </div>
-      <div>
-        <label className="d-flex">
-          <div className="w-25">
-            Type of content
-          </div>
-          <div className="w-75">
-            <select className="border px-2 py-1 w-100" value={state.type} onChange={(e) => handleChange(e, 'type')}>
-              {contentTypes.map(t => (<option key={`${state.model}-rule-contentTypes-option-${t}`}>{t}</option>))}
             </select>
           </div>
         </label>
@@ -111,7 +88,7 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
           </div>
         </label>
       </div>
-      {defaultOptions[state.type] && Object.keys(defaultOptions[state.type]).map(o => (
+      {Object.keys(defaultOptions).map(o => (
         <div key={`${state.model}-rule-options-option-${o}`}>
           <label className="d-flex">
             <div className="w-25">
