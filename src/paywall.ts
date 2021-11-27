@@ -62,7 +62,7 @@ function track(rule, path, visitor) {
   // @ts-ignore
   window._wq = window._wq || [];
   // @ts-ignore
-  _wq.push({ id: "_all", onReady: function(video) {
+  _wq.push({ id: '_all', onReady: function(video) {
     clearTimeout(trackTimeOut);
     video.bind('secondchange', function(s) {
       if (s === rule.videoTimeThreshold * 60) {

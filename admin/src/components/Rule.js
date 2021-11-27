@@ -25,10 +25,10 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
   }
   const [state, setState] = useState({
     model: collectionTypesNames[0],
-    type: contentTypes[0],
     path: '/' + collectionTypesNames[0],
     field: Object.keys(collectionTypes[collectionTypesNames[0]])
       .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[collectionTypesNames[0]][f].type) !== -1)[0],
+    videoField: Object.keys(collectionTypes[collectionTypesNames[0]]),
     ...defaultOptions,
     ...(rule || {})
   });
@@ -57,22 +57,40 @@ function Rule({ collectionTypes, onChange, rule, onDelete }) {
         </label>
       </div>
       {collectionTypes[state.model] && (
-        <div>
-          <label className="d-flex">
-            <div className="w-25">
-              Field for paywall
-            </div>
-            <div className="w-75">
-              <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'field')}>
-                {
-                  Object.keys(collectionTypes[state.model])
-                    .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[state.model][f].type) !== -1)
-                    .map(t => (<option key={`${state.model}-rule-contentTypes-field-${t}`}>{t}</option>))
-                }
-              </select>
-            </div>
-          </label>
-        </div>
+        <>
+          <div>
+            <label className="d-flex">
+              <div className="w-25">
+                Field for paywall
+              </div>
+              <div className="w-75">
+                <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'videoField')}>
+                  {
+                    Object.keys(collectionTypes[state.model])
+                      .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[state.model][f].type) !== -1)
+                      .map(t => (<option key={`${state.model}-rule-contentTypes-field-${t}`}>{t}</option>))
+                  }
+                </select>
+              </div>
+            </label>
+          </div>
+          <div>
+            <label className="d-flex">
+              <div className="w-25">
+                Field with video for paywall
+              </div>
+              <div className="w-75">
+                <select className="border px-2 py-1 w-100" value={state.field} onChange={(e) => handleChange(e, 'field')}>
+                  {
+                    Object.keys(collectionTypes[state.model])
+                      .filter(f => ALLOWED_COLLECTION_TYPES.indexOf(collectionTypes[state.model][f].type) !== -1)
+                      .map(t => (<option key={`${state.model}-rule-contentTypes-field-${t}`}>{t}</option>))
+                  }
+                </select>
+              </div>
+            </label>
+          </div>
+        </>
       )}
       <div>
         <label className="d-flex">
