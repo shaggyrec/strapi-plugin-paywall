@@ -21,8 +21,10 @@ function replacePaywall(dataObject, modelSettingsMap, isUserAuthorized) {
       } else {
         dataObject[ruleSettings.field] = trimContent(dataObject[ruleSettings.field], ruleSettings.wordsToShow)
       }
+      dataObject.paywall = dataObject[ruleSettings.videoField] ? ruleSettings.videoField : ruleSettings.field
+    } else {
+      delete dataObject.paywall;
     }
-    delete dataObject.paywall;
   }
   return dataObject;
 }
