@@ -2,7 +2,7 @@
 
 ## Install the plugin
 
-    npm i git@bitbucket.org:x2-investa-nl/strapi-plugin-paywall.git 
+    npm i strapi-plugin-paywall
 
 ### Go to the admin panel.
 
