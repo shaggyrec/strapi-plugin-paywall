@@ -34,7 +34,7 @@ module.exports = {
     const ormModel = strapi.query(models.settings.modelName, pluginName);
     const currentSettings = await ormModel.findOne();
     if (currentSettings) {
-      await ormModel.update(currentSettings.id, { ...currentSettings, ...s })
+      await ormModel.update({ id: currentSettings.id }, { ...currentSettings, ...s })
     } else {
       await ormModel.create(s)
     }
@@ -111,7 +111,7 @@ module.exports = {
       ? visits.filter(v => v.date > paywall.reset_at).length >= settings.hardCapLimitation
       : visits.length >= settings.hardCapLimitation
 
-    await ormModel.update(paywall.id, { visits: JSON.stringify(visits), enabled: paywall.enabled || !!threshold } );
+    await ormModel.update({ id: paywall.id }, { visits: JSON.stringify(visits), enabled: paywall.enabled || !!threshold } );
   },
 
   async getVisits(q) {
